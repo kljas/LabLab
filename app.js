@@ -75,6 +75,35 @@ app.get("/", (req, res) => {
     });
 }); 
 
+app.use("/contact", function (request, response) {
+    response.render("contact", {
+        title: "Мои контакты",
+        emailsVisible: true,
+        emails: ["gavgav@mycorp.com", "mioaw@mycorp.com"],
+        phone: "+1234567890",
+    });
+});
+
+app.use("/faq", function(request, response){
+    response.render("faq", {
+        title: "Обо мне",
+        name: "Святослав",
+        age: "21",
+        occupation: "Студент",
+        hobby: "TTRPG",
+        kostyl: true,
+        intrests: ["Фэнтези", "Геймдизайн", "TTRPG"]
+    });
+})
+
+app.use(express.static(path.join(views, 'public')));
+
+app.use("/blog", function (request, response) {
+    response.render("blog", {
+        title: "Блогус",
+    });
+})
+
 app.post("/", (req, res) => {
     res.send("Got a POST request");
 });
@@ -95,14 +124,6 @@ app.get('/user/:id', function (req, res, next) {
     res.send('USER');
 });
 
-app.use("/contact", function (request, response) {
-    response.render("contact", {
-        title: "Мои контакты",
-        emailsVisible: true,
-        emails: ["gavgav@mycorp.com", "mioaw@mycorp.com"],
-        phone: "+1234567890",
-    });
-});
 
 app.listen(3000, () => {
     console.log("Example app listening on port 3000!");
